@@ -57,42 +57,24 @@ const imprimeUsuario = (pokemon) => {
                             <td> ${pokemon.name} </td>
                             <td> ${pokemon.url}</td>
                             <td><button class="btn" data-toggle="modal" 
-                            data-target="#exampleModalCenter" onclick="toggleUsuario(${pokemon})">Detalle</button></td></tr>`
+                            data-target="#exampleModalCenter" onclick="togglePokemon(${pokemon.url})">Detalle</button></td></tr>`
    
             tablausuarios.innerHTML = usuariosHTML
 
 }
 
 
-function toggleUsuario(ide)  {
-    
+function togglePokemon(url)  {
+    var URL = url;
 
-    fetch(URL1, {method: 'GET'})
+    fetch(URL, {method: 'GET'})
     .then( response => response.json())
-    .then( listaUsuarios => {
-                listaUsuarios.filter( user => user.id == ide).forEach( user => {
-                                                   document.getElementById("tituloModal").innerHTML = `Detalle usuario #${user.id}`;
-                                                    modalUsuario.innerHTML =  `<ul class="list-group">
-                                                    <li class="list-group-item" id="lista">Name: ${user.name}</li>
-                                                    <li class="list-group-item" id="lista">Username: ${user.username}</li>
-                                                    <li class="list-group-item" id="lista">Email: ${user.email}</li>
-                                                    <li class="list-group-item" id="lista"><ul class="list-group-secondary bg-gray">Address:
-                                                        <li class="list-group-item" id="lista2">Street: ${user.address.street}</li>
-                                                        <li class="list-group-item" id="lista2">Suite: ${user.address.suite}</li>
-                                                        <li class="list-group-item" id="lista2">Zipcode: ${user.address.zipcode}</li>
-                                                        <li class="list-group-item" id="lista2"><ul class="list-group">Geo:
-                                                            <li class="list-group-item" id="lista3">Lat: ${user.address.geo.lat}</li>
-                                                            <li class="list-group-item" id="lista3">Lng:${user.address.geo.lng}</li></ul></li>
-                                                    </ul></li>
-                                                    <li class="list-group-item" id="lista">Phone: ${user.phone}</li>
-                                                    <li class="list-group-item" id="lista">Website: ${user.website}</li>
-                                                    <li class="list-group-item" id="lista"><ul class="list-group">Company:
-                                                        <li class="list-group-item" id="lista2">name: ${user.company.name}</li>
-                                                        <li class="list-group-item" id="lista2">Catchphrase: ${user.company.catchPhrase}</li>
-                                                       <li class="list-group-item" id="lista2">Bies: ${user.company.bs}</li></ul></li></ul>`
+    .then( pokemon => {
+               
+                                                   document.getElementById("tituloModal").innerHTML = `Detalle Pokemon #${pokemon.forms[0].name}`;
+                                                    modalUsuario.innerHTML =  `${pokemon.weight}`
                     })
-                })                                              
-
+              
 }
 
 
